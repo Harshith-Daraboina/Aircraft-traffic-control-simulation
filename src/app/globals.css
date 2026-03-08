@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f172a;
+  --foreground: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+}
+
+#root,
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background-color: #020617;
+  /* Slate 950 */
+  z-index: 10;
+}
+
+/* Radar sweep animation */
+@keyframes sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200vw;
+  height: 200vw;
+  margin-left: -100vw;
+  margin-top: -100vw;
+  pointer-events: none;
+  z-index: 400;
+  /* above map tiles, below markers (Leaflet markers are usually z-index 600+) */
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(34, 197, 94, 0) 0%, rgba(34, 197, 94, 0.3) 10%, rgba(34, 197, 94, 0) 15%);
+  animation: sweep 4s linear infinite;
+}
+
+/* Map tiles styling */
+.leaflet-tile-pane {
+  /* Removed aggressive filter that caused visibility issues */
+}
